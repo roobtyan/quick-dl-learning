@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.29)
+cmake_minimum_required(VERSION 3.20)
 project(learning)
 
 set(ABSL_PROPAGATE_CXX_STD ON)
