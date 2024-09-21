@@ -17,3 +17,6 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(absl)
 
 add_subdirectory(learning)
+
+install(TARGETS learning
+        RUNTIME DESTINATION bin)  # RUNTIME 表示可执行文件
