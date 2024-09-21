@@ -6,6 +6,7 @@ set(ABSL_PROPAGATE_CXX_STD ON)
 set(CMAKE_CXX_STANDARD 20)
 
 include(FetchContent)
+include(CPack)
 
 FetchContent_Declare(
         absl
