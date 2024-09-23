@@ -1,51 +1,49 @@
 #pragma once
 
-#include <vector>
+#include <filesystem>
 #include <string>
-#include <absl/time/time.h>
-#include "absl/status/status.h"
-#include "utils.h"
+#include <vector>
 
 namespace roobtyan {
+class MemoryTool {
+ public:
+  MemoryTool();
 
-    class MemoryTool {
-    public:
-        MemoryTool();
+  ~MemoryTool();
 
-        ~MemoryTool();
+  void Process();
 
-        void Process();
+  static int GetMemoryItemNextReviewGap(const int& correct_count);
 
-        static int GetMemoryItemNextReviewGap(const int& correct_count);
+ private:
+  void AddMemory();
 
-    private:
-        void AddMemory();
+  void ReviewMemory();
 
-        void ReviewMemory();
+  void LoadData();
 
-        void LoadData();
+  void SaveData() const;
 
-        void SaveData();
+  struct MemoryItem {
+    std::string uuid;
+    std::string question;
+    std::string answer;
+    int review_count = 0;
+    int correct_count = 0;
+    bool is_restart = false;
+    std::string create_time;
+    std::string last_review_time;
+    std::string next_review_time;
 
-        struct MemoryItem {
-            std::string uuid;
-            std::string question;
-            std::string answer;
-            int review_count = 0;
-            int correct_count = 0;
-            bool is_restart = false;
-            std::string create_time;
-            std::string last_review_time;
-            std::string next_review_time;
+    MemoryItem();
 
-            MemoryItem();
+    MemoryItem(std::string question, std::string answer);
 
-            MemoryItem(std::string question, std::string answer);
+    [[nodiscard]] std::string ToString() const;
+  };
 
-            [[nodiscard]] std::string ToString() const;
-        };
-
-        std::vector<MemoryItem> memoryItems;
-    };
-
-} // roobtyan
+  std::vector<MemoryItem> memory_items_;
+  const std::filesystem::path memory_data_path_ =
+      std::filesystem::current_path() / "memory_data.txt";
+};
+}  // namespace roobtyan

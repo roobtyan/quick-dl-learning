@@ -3,7 +3,7 @@ project(learning)
 
 set(ABSL_PROPAGATE_CXX_STD ON)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 
 include(FetchContent)
 include(CPack)
@@ -20,3 +20,12 @@ add_subdirectory(learning)
 
 install(TARGETS learning
         RUNTIME DESTINATION bin)  # RUNTIME 表示可执行文件
+
+# 软件信息
+set(CPACK_PACKAGE_NAME "learning")
+
+# 软件版本
+set(CPACK_PACKAGE_VERSION_MAJOR 0)
+
+# 软件作者
+set(CPACK_PACKAGE_VENDOR "roobtyan")
